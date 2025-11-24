@@ -1,15 +1,17 @@
 const express = require('express')
-const router = express().router()
+const router = express.Router()
 const Job = require('../models/Job')
 
 router.get("/", async (req, res) => {
   try{
     const jobs = await Job.find()
 
-    if(jobs.length > 0) return res.json(jobs)
-    else return res.status(400).json({ message: "No job found!" })
+    if(jobs.length > 0) {
+      res.status(200).json(jobs)
+    }
+    else res.status(404).json({ message: "No Jobs!" })
   } catch(err) {
-    console.error(err.message)
+    console.error(err)
   }
 })
 
@@ -18,7 +20,7 @@ router.get("/:id", async (req, res) => {
     const job = await Job.findById(req.params.id)
 
     if(job) return res.status(200).json({ message: job })
-    else return res.status(400).json({ message: "Job was not found!" })
+    else return res.status(404).json({ message: "Job was not found!" })
   } catch(err) {
     console.error(err.message)
   }
@@ -46,7 +48,7 @@ router.put("/:id", async (req, res) => {
     )
 
     if(job) return res.status(201).json({ message: job })
-    else return res.status(400).json({ message: "Job was not found!" })
+    else return res.status(404).json({ message: "Job was not found!" })
   } catch(err) {
     console.error(err.message)
   }
@@ -57,7 +59,7 @@ router.delete("/", async (req, res) => {
     const job = await Job.findByIdAndDelete(req.params.id)
 
     if(job) res.status(200).json({ message: "Job deleted!" })
-    else return res.status(400).json({ message: "Job was not found!" })
+    else return res.status(404).json({ message: "Job was not found!" })
   } catch(err) {
     console.error(err.message)
   }

@@ -1,4 +1,4 @@
-// import Card from "./Card"
+import { Link } from "react-router-dom"
 import Styles from "../styles/Home.module.css"
 
 function Home() {
@@ -19,8 +19,8 @@ function Home() {
           <h1 className={device.h1}>sakaJobo</h1>
           <p className={device.p}>Chase your future with us!</p>
           <p className={device.p}>We connect you to your dream job so you can scale up and secure your career. Sign up and stay in the wave with fellow developers today!</p>
-          <div>
-            <button className="bg-yellow-500 text-white py-3 px-5 rounded-sm mt-5 cursor-pointer duration-100 text-xl hover:bg-yellow-600" type="button">Sign Up</button>
+          <div className="mt-5 ">
+            <Link className="bg-yellow-500 text-white py-2 px-5 rounded-sm cursor-pointer duration-100 text-xl hover:bg-yellow-600" to="/signup">Sign Up</Link>
           </div>
         </div>
       </section>

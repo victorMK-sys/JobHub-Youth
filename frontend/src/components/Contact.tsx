@@ -1,9 +1,9 @@
-function Gallery() {
+function Contact() {
   return(
     <section className="h-screen">
-
+      
     </section>
   )
 }
 
-export default Gallery
+export default Contact

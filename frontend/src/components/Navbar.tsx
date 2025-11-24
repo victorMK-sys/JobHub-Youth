@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom"
+
 function Navbar() {
   const link = 'cursor-pointer text-base font-bold hover:text-yellow-500'
   const largeScreen = {
-    nav: "bg-white flex sticky top-0 justify-between items-center px-4 py-3 shadow-xl z-50",
+    nav: "bg-white flex sticky top-0 justify-between items-center px-4 py-3 shadow-xl mb-5 z-50",
     div: "flex",
     menu: "hidden"
   }
@@ -21,17 +23,17 @@ function Navbar() {
       </div>
       <div className={screen.div}>
         <ul className="flex items-center justify-center gap-5">
-          <li className={link}>Home</li>
-          <li className={link}>About</li>
-          <li className={link}>Listings</li>
-          <li className="cursor-pointer text-base px-2 py-1 rounded-sm hover:bg-yellow-500 hover:text-white">Login</li>
-          <li className={link}>
+          <Link className={link} to="/">Home</Link>
+          <Link className={link} to="/about">About</Link>
+          <Link className={link} to="/jobs">Listings</Link>
+          <Link className="cursor-pointer text-base px-2 py-1 rounded-sm hover:bg-yellow-500 hover:text-white" to="/login">Login</Link>
+          <Link to="profile">
             <div className="flex">
-              <button type="button">
+              <button type="button" className="cursor-pointer">
                 <img className="w-5" src="/user.png" alt="PROFILE" />
               </button> 
             </div>  
-          </li>
+          </Link>
         </ul>
       </div>
       <div className={menu}>
@@ -41,10 +43,10 @@ function Navbar() {
       </div>
       <div className="absolute top-2 right-0 bg-black w-1/2 py-2 hidden" id="menuOps">
         <div className="rounded-full w-6 text-center bg-red-700 float-right mr-2 font-bold"><button type="button" onClick={removeMenu}>X</button></div>
-        <ul>
-          <li className="text-white border-b-1 border-gray-300 px-2 mt-5">Home</li>
-          <li className="text-white border-b-1 border-gray-300 px-2">Listings</li>
-          <li className="text-white px-2">Profile</li>
+        <ul className="flex flex-col">
+          <Link className="text-white border-b-1 border-gray-300 px-2 mt-5" to="/">Home</Link>
+          <Link className="text-white border-b-1 border-gray-300 px-2" to="/jobs">Listings</Link>
+          <Link className="text-white px-2" to="/login">Login</Link>
         </ul>
       </div>
     </nav>

@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  overflow: hidden;
+  margin: 20px auto;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0px 5px 10px hsla(0, 0%, 0%, 0.75);
+  backdrop-filter: blur(10px);
+}
+
+.container {
+  width: 850px;
+  display: flex;
+  gap: 45px;
+  align-items: center;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+
+.containerSlide {
+  animation: slideDetails .75s forwards;
+  transform: translateX(-53%);
+}
+
+@media (orientation: portrait) {
+  .form {
+    max-width: 80%;
+  }
+  .container {
+    width: 215%;
+  }
+}
