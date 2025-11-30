@@ -15,13 +15,13 @@
   display: flex;
   gap: 45px;
   align-items: center;
-  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
 }
 
 .containerSlide {
   animation: slideDetails .75s forwards;
   transform: translateX(-53%);
 }
+
 
 @media (orientation: portrait) {
   .form {

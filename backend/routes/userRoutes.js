@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { verifyToken } = require('../middleware/auth')
 
-router.get("/", async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
   try{
     const users = await User.find()
 
@@ -13,7 +16,7 @@ router.get("/", async (req, res) => {
   }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", verifyToken, async (req, res) => {
   try{
     const user = await User.findById(req.params.id)
 
@@ -25,19 +28,32 @@ router.get("/:id", async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-  const { user_name, user_description, user_vacancies, user_employerId } = req.body
+  const { uname, email, pass, phone, emp, git, quote } = req.body
+  const duplicate = await User.findOne({email})
 
+  if(duplicate) {
+    return res.status(403).json({ message: "A user by the same email already exists. Login instead" })
+  }
   try{
-    const user = new User({ user_name, user_description, user_vacancies, user_employerId })
+    const hashedPass = await bcrypt.hash(pass, 10)
+    const user = new User({ uname, email, hashedPass, phone, emp, git, quote })
     const saved = await user.save()
 
-    res.status(201).json(saved)
+    const token = jwt.sign(
+      {
+        id: saved._id,
+        email: saved.email
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "2h" }
+    )
+    res.status(201).json({ message: "User added sucessfully", token: token, user: saved })
   } catch(err) {
     console.error(err.message)
   }
 })
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", verifyToken, async (req, res) => {
   try{
     const user = await User.findByIdAndUpdate(
       req.params.id,

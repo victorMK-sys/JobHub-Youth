@@ -41,7 +41,7 @@ function Navbar() {
           <img className="w-5" src="/more.png" alt="Menu" />
         </button>
       </div>
-      <div className="absolute top-2 right-0 bg-black w-1/2 py-2 hidden" id="menuOps">
+      <div className="absolute top-2 right-1 bg-gray-800 rounded-lg w-1/2 py-2 hidden" id="menuOps">
         <div className="rounded-full w-6 text-center bg-red-700 float-right mr-2 font-bold"><button type="button" onClick={removeMenu}>X</button></div>
         <ul className="flex flex-col">
           <Link className="text-white border-b-1 border-gray-300 px-2 mt-5" to="/">Home</Link>
