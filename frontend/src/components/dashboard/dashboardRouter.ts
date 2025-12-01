@@ -54,3 +54,26 @@ export function useUserInfo() {
 
   return user
 }
+
+export async function deleteUser() {
+  try{
+    const res = await fetch("http://localhost:5500/api/users", {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+
+    if(res.ok) {
+      document.getElementById("overlay")?.classList.toggle("hidden")
+      document.getElementById("deleteAcc")?.classList.toggle("hidden")
+      document.getElementById('doneEl')?.classList.toggle("translate-x-0")
+
+      setTimeout(() => {
+        window.location.pathname = "/"
+      }, 1000)
+    }
+  } catch(err: any) {
+    console.error(err.message)
+  }
+}

@@ -7,17 +7,21 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const { uname, pass } = req.body
-    const user = await User.findOne({$or: [{ uname: uname }, { email: uname }]})
+    const { uname, pass } = req.body;
+    const user = await User.findOne({
+      $or: [{ uname: uname }, { email: uname }],
+    });
 
     if (!user) {
-      return res.status(404).json({ message: "User does not exist." })
+      return res
+        .status(404)
+        .json({ message: "Username/Email does not exist. Signup instead" });
     }
 
-    const validPassword = await bcrypt.compare(pass, user.hashedPass)
+    const validPassword = await bcrypt.compare(pass, user.hashedPass);
 
     if (!validPassword) {
-      return res.status(401).json({ message: "Invalid password." })
+      return res.status(401).json({ message: "Invalid password." });
     }
 
     const token = jwt.sign(
@@ -28,16 +32,19 @@ router.post("/", async (req, res) => {
       },
       process.env.JWT_SECRET,
       { expiresIn: "2h" }
-    )
+    );
+
+    if (user.uname === process.env.ADMIN)
+      return res.status(200).json({ message: process.env.ADMIN, token: token });
 
     return res.status(200).json({
       message: "Success",
       token: token,
-    })
+    });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: "Internal server error." })
+    return res.status(500).json({ message: "Internal server error." });
   }
-})
+});
 
-module.exports = router
+module.exports = router;
