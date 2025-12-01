@@ -4,7 +4,7 @@ export const getJobs = () => {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5500/api/jobs")
+    fetch(`${import.meta.env.VITE_APP_URL}/api/jobs`)
       .then((res) => res.json())
       .then((data) => setJobs(data))
       .catch((err) => console.error(err.message));
@@ -23,7 +23,7 @@ export async function addUser(
   quote: string
 ) {
   try {
-    const res = await fetch("http://localhost:5500/api/users", {
+    const res = await fetch(`${import.meta.env.VITE_APP_URL}/api/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export async function addUser(
 
 export async function authUser(uname: string, pass: string) {
   try {
-    const res = await fetch("http://localhost:5500/api/auth", {
+    const res = await fetch(`${import.meta.env.VITE_APP_URL}/api/auth`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

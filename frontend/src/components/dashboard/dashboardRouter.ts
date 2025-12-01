@@ -4,7 +4,7 @@ export function getJobs() {
   const [jobs, setJobs] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:5500/api/jobs", {
+    fetch(`${import.meta.env.VITE_APP_URL}/api/jobs`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -22,7 +22,7 @@ export function getApplications() {
   const [applications, setApplications] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:5500/api/jobs", {
+    fetch(`${import.meta.env.VITE_APP_URL}/api/jobs`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export function useUserInfo() {
   const [user, setUser] = useState({})
   
   useEffect(() => {
-    fetch("http://localhost:5500/api/users/me", {
+    fetch(`${import.meta.env.VITE_APP_URL}/api/users/me`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`
@@ -57,7 +57,7 @@ export function useUserInfo() {
 
 export async function deleteUser() {
   try{
-    const res = await fetch("http://localhost:5500/api/users", {
+    const res = await fetch(`${import.meta.env.VITE_APP_URL}/api/users`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`
