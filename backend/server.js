@@ -11,7 +11,7 @@ const app = express()
 connectDB()
 
 const corsOptions = {
-  origin: "https://jobhub-youth-web.onrender.com",
+  origin: ["https://jobhub-youth-web.onrender.com", "http://localhost:5500"],
   methods: ['GET', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }
