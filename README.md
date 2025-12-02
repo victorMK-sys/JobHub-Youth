@@ -1,7 +1,7 @@
 
-# JobHub — Full-Stack Job Posting Platform
+# SakaJobo — Full-Stack Job Posting Platform
 
-JobHub is a full-stack application built with a **Node.js/Express backend** and a **React + Vite frontend**, allowing users to create accounts, authenticate, manage job posts, and update profiles.
+SakaJobo is a full-stack application built with a **Node.js/Express backend** and a **React + Vite frontend**, allowing users to create accounts, authenticate, manage job posts, and update profiles.
 
 ---
 
@@ -30,6 +30,9 @@ JobHub is a full-stack application built with a **Node.js/Express backend** and 
 - JWT for authentication
 - CORS configured for production
 
+### Deployment
+- Render (Backend and Frontend)
+
 ---
 
 ## 📁 Project Structure
@@ -42,16 +45,35 @@ root/
 │   ├── models/
 │   ├── routes/
 │   ├── server.js
+|   ├── package.json
 │   └── .env
 │
 └── frontend/
     ├── src/
     ├── public/
     ├── vite.config.ts
+    ├── package.json
     └── .env
 ```
 
 ---
+## 🚀 Project Setup
+Copy and paste the following commands in order to the terminal if you are new to this
+
+## 📝 Requirements
+Before running this project, make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- npm (comes with Node.js)
+- A MongoDB database (Atlas or local)
+
+> **Note:** Node.js is required to run both the backend and frontend. Without it, the application will not start.
+
+---
+
+### Clone the repo
+```bash
+git clone https://github.com/victorMK-sys/JobHub-Youth.git
+```
 
 ## ⚙️ Backend Setup
 ### 1. Install dependencies
@@ -61,11 +83,11 @@ npm install
 ```
 
 ### 2. Create a `.env` file
+You need a conection string to mongodb ([MongoDB Atlas](https://www.mongodb.com/resources/products/fundamentals/mongodb-connection-string)).
 ```
 PORT=5500
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-CORS_ORIGIN=https://your-frontend-domain
 ```
 
 ### 3. Run the backend
@@ -84,7 +106,7 @@ npm install
 
 ### 2. Create a `.env` file
 ```
-VITE_APP_URL=https://your-backend-domain
+VITE_APP_URL=your_backend_url
 VITE_ADMIN=your_admin_keyword
 ```
 
@@ -113,6 +135,7 @@ POST /api/users → Signup
 ### User Routes
 ```
 GET /api/users/me → Get logged-in user
+DELETE /api/users/me → Delete user account
 ```
 
 ### Job Routes
@@ -128,3 +151,7 @@ DELETE /api/jobs/:id → Delete job
 ## 🧪 Testing
 - Use ThunderClient / Postman for backend testing
 - Ensure your Authorization header is included when testing protected routes
+
+---
+
+The project is also live at [SakaJobo](https://jobhub-youth-web.onrender.com/).
